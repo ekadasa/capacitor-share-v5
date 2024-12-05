@@ -113,13 +113,10 @@ public class SharePlugin extends Plugin {
             if (files != null && files.length() != 0) {
                 shareFiles(files, intent, call);
             }
-              if (packageName.isEmpty()) {
+            if (packageName.isEmpty()) {
                 int flags = PendingIntent.FLAG_UPDATE_CURRENT;
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                     flags = flags | PendingIntent.FLAG_MUTABLE;
-                }
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-                    flags = flags | PendingIntent.FLAG_ALLOW_UNSAFE_IMPLICIT_INTENT;
                 }
 
                 // requestCode parameter is not used. Providing 0
@@ -138,7 +135,6 @@ public class SharePlugin extends Plugin {
                 isPresenting = true;
                 startActivityForResult(call, intent, "activityResult");
             }
-
         } else {
             call.reject("Can't share while sharing is in progress");
         }
